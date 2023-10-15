@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+    int t; cin >> t;
+    while(t--){
+       int n; cin >> n;
+       char ar [n+1][n+1];
+       bool mark[n+1][n+1];
+       for(int i = 1; i<=n; ++i){
+            for(int j = 1; j<=n; ++j){
+                cin >> ar[i][j];
+                mark[i][j] = false;
+            }
+       }
+       ll ans = 0;
+       for(int i = 1; i<=n; ++i){
+            for(int j = 1; j<=n; ++j){
+                if(mark[i][j]) continue;
+                int mx = max(ar[i][j],max(ar[n-j+1][i],max(ar[n-i+1][n-j+1],ar[j][n-i+1])));
+                 ans+=mx*4-ar[i][j]-ar[n-j+1][i]-ar[n-i+1][n-j+1]-ar[j][n-i+1];
+                mark[i][j] = true; mark[n-j+1][i] = true; mark[n-i+1][n-j+1] = true; mark[j][n-i+1] = true;
+            }
+       }
+       cout << ans << endl;
+    }
+}
